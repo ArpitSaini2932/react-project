@@ -1,9 +1,9 @@
-
+import Vishu from "./vishu.jsx";
 
 function App() {
 
   return (
-   <h1>Arpit Saini</h1>
+    <Vishu/>
   )
 }
 
