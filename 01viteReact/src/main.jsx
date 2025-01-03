@@ -1,9 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode> 
+// Making a custom element in React
+
+const NewCustomElement = React.createElement(
+  "p",
+  null,
+    "click here visit google"
+)
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  
+    NewCustomElement
+ 
 )
