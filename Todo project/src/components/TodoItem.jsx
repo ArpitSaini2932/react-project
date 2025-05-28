@@ -1,57 +1,73 @@
-import React, { useState } from 'react'
-import { useTodo } from '../contexts';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeTodo, updateTodo } from '../features/todo/todoSlice';
 
-function TodoItem({ todo }) {
-  const [isTodoEditable, setIsTodoEditable] = useState(false);
-  const [todoMsg, setTodoMsg] = useState(todo);
-  const { updateTodo, deleteTodo, toggleCompleted } = useTodo();
+function Todos() {
+    const dispatch = useDispatch();
+    const todos = useSelector(state => state.todo.todos);  // ✅ Corrected: Ensure correct path in Redux state
 
-  const editTodo = () => {
-    updateTodo(todo.id, { ...todo, todo: todoMsg });
-    setIsTodoEditable(false);
-  };
+    // 🆕 State for tracking which todo is being edited
+    const [editId, setEditId] = useState(null);  // Stores the ID of the todo being edited
+    const [editText, setEditText] = useState(""); // Stores new text input by the user
 
-  const toggleComplete = () => {
-    toggleCompleted(todo.id);
-  };
+    // 🆕 Function to enter edit mode
+    const handleEdit = (id, text) => {
+        setEditId(id);   // Set the ID of the todo being edited
+        setEditText(text); // Pre-fill input with existing todo text
+    };
 
-  return (
-    <div
-      className={`flex items-center gap-4 p-4 rounded-xl shadow-lg transition-all duration-300 ${todo.completed ? "bg-gradient-to-r from-green-900 to-green-800" : "bg-gradient-to-r from-gray-800 to-gray-700"
-        }`}
-    >
-      <input
-        type="checkbox"
-        className="w-5 h-5 cursor-pointer accent-purple-600"
-        checked={todo.completed}
-        onChange={toggleComplete}
-      />
-      <input
-        type="text"
-        className={`w-full px-3 py-2 rounded-lg border-2 outline-none transition-all ${isTodoEditable ? "border-purple-500 bg-gray-900" : "border-transparent bg-transparent"
-          } ${todo.completed ? "line-through text-gray-400" : "text-gray-100"}`}
-        value={todoMsg.todo}
-        onChange={(e) => setTodoMsg(e.target.value)}
-        readOnly={!isTodoEditable}
-      />
-      <button
-        className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-        onClick={() => {
-          if (todo.completed) return;
-          if (isTodoEditable) editTodo();
-          else setIsTodoEditable((prev) => !prev);
-        }}
-        disabled={todo.completed}
-      >
-        {isTodoEditable ? "💾" : "✏️"}
-      </button>
-      <button
-        className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition-all shadow-md hover:shadow-lg"
-        onClick={() => deleteTodo(todo.id)}
-      >
-        ❌
-      </button>
-    </div>
-  );
+    // 🆕 Function to update the todo when "Save" is clicked or Enter is pressed
+    const handleUpdate = (id) => {
+        if (editText.trim() !== "") {  // Prevent empty todos
+            dispatch(updateTodo({ id, text: editText }));  // ✅ Dispatch updateTodo with the new text
+            setEditId(null);  // Exit edit mode
+        }
+    };
+
+    return (
+        <>
+            <div>Todos</div>
+            <ul className="list-none">
+                {todos.map((todo) => (
+                    <li key={todo.id} className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded">
+                        {editId === todo.id ? ( 
+                            // 🆕 Show input when editing
+                            <input
+                                type="text"
+                                value={editText}
+                                onChange={(e) => setEditText(e.target.value)}
+                                onKeyDown={(e) => e.key === "Enter" && handleUpdate(todo.id)} // 🆕 Save on Enter key
+                                className="text-black px-2 py-1 rounded w-full"
+                                autoFocus
+                            />
+                        ) : (
+                            // Default view: Show todo text
+                            <div className='text-white'>{todo.text}</div>
+                        )}
+
+                        <div className="flex gap-2">
+                            {editId === todo.id ? (
+                                // 🆕 Show "Save" button while editing
+                                <button onClick={() => handleUpdate(todo.id)} className="text-white bg-green-500 px-3 py-1 rounded">
+                                    Save
+                                </button>
+                            ) : (
+                                // 🆕 Show "Edit" button when not editing
+                                <button onClick={() => handleEdit(todo.id, todo.text)} className="text-white bg-blue-500 px-3 py-1 rounded">
+                                    Edit
+                                </button>
+                            )}
+
+                            {/* Delete Button */}
+                            <button onClick={() => dispatch(removeTodo(todo.id))} className="text-white bg-red-500 px-3 py-1 rounded">
+                                Delete
+                            </button>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </>
+    );
 }
-export default TodoItem;
+
+export default Todos;
