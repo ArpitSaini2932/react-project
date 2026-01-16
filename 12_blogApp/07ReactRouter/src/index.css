@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f7f7f7; /* Light background color */
+    color: #333; /* Default text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Add smooth scroll to anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Apply box-shadow to cards */
+.card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}

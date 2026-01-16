@@ -23,7 +23,7 @@ const router = createBrowserRouter([
             <Login />
           </AuthLayout>
         )
-      }
+      },
       {
         path: "/signup",
         element: (
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
             <Signup />
           </AuthLayout>
         )
-      }
+      },
       {
         path: "/all-posts",
         element: (
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             <AllPost />
           </AuthLayout>
         )
-      }
+      },
       {
         path: "/add-posts",
         element: (
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
             <AddPost />
           </AuthLayout>
         )
-      }
+      },
       {
         path: "/edit-post/:slug",
         element: (
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
             <EditPost />
           </AuthLayout>
         )
-      }
+      },
       {
         path: "/post/:slug",
         element: <Posts />
