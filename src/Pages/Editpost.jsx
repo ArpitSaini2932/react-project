@@ -16,7 +16,7 @@ function EditPost() {
             })
         }
         else {
-            Navigate('/')
+            Navigate('/');
         }
     }, [slug, Navigate])
 
