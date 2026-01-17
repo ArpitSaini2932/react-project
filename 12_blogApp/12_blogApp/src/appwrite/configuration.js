@@ -119,7 +119,7 @@ export class Services{
                 fileId
             )
         } catch (error) {
-            console.log{"Appwrite Services :: GetFilePreview :: error", error}
+            console.log("Appwrite Services :: GetFilePreview :: error", error)
         }
     }
 

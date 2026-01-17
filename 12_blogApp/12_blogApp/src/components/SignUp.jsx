@@ -5,6 +5,7 @@ import { login } from '../store/authSlice'
 import { Button, Logo, Input } from "./index"
 import { useForm } from 'react-hook-form'
 import authservice from '../appwrite/auth'
+import { current } from '@reduxjs/toolkit'
 function SignUp() {
     const dispatch = useDispatch()
     const { register, handleSubmit } = useForm()
@@ -18,7 +19,7 @@ function SignUp() {
             if (UserData) {
                 await authservice.GetCurrentUser()
                 if (UserData) {
-                    dispatch(login(UserData))
+                    dispatch(login({UserData: currentUser}))
                     navigate("/")
                 }
             }
@@ -30,7 +31,7 @@ function SignUp() {
         <div className='flex items-center justify-center'>
             <div className={`mx-auto w-auto max-w-lg bg-gray-100 rounded-xl p-10 border-black/10 border`}>
              <div className='mb-2 flex  jsutify-center'>
-              <span className='inline-block w-full max-w-[100px]'>
+              <span className='inline-block w-full max-w-25'>
                 <Logo width='100%'/>
               </span>    
            </div>

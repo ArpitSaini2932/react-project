@@ -8,7 +8,7 @@ function Header() {
   const authStatus  = useSelector((state)=> state.auth.status )
   const navigate = useNavigate()
 
-  NavItems = [
+  const NavItems = [
     {
       name : "Home"   ,
       slug : "/",
@@ -20,7 +20,7 @@ function Header() {
       active : !authStatus
     },
     {
-      name : "Signup" ,
+      \name : "Signup " ,
       slug : "/signup",
       active : !authStatus
     },
@@ -32,7 +32,7 @@ function Header() {
     {
       name : "Add Post" ,
       slug : "/add-post",
-      active : true
+      active : authStatus
     },
   ]
   return (
