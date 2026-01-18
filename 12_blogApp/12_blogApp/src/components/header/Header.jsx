@@ -20,18 +20,18 @@ function Header() {
       active : !authStatus
     },
     {
-      \name : "Signup " ,
+      name : "Signup " ,
       slug : "/signup",
       active : !authStatus
     },
     {
-      name : "All Post" ,
-      slug :"/all-post",
+      name : "All Posts" ,
+      slug :"/all-posts",
       active : authStatus
     },
     {
-      name : "Add Post" ,
-      slug : "/add-post",
+      name : "Add Posts" ,
+      slug : "/add-posts",
       active : authStatus
     },
   ]

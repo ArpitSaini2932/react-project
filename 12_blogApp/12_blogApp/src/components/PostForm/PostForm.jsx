@@ -17,33 +17,33 @@ function PostForm({ post }) {
   })
 
   const navigate = useNavigate()
-  const userData = useSelector((state) => state.user.userData)
+  const userData = useSelector((state) => state.auth.userData)
 
   const submit = async (data) => {
     if (post) {
       const file = await data.image[0] ? services.UploadFile(data.image[0]) : null
 
       if (file) {
-        services.DeleteFile(post.featuredImg)
+        services.DeleteFile(post.featuredimage)
       }
       const dbPost = await services.UpdatePost(post.$id, {
         ...data,
-        featuredImg: file ? file.$id : undefined,
+        featuredimage: file ? file.$id : undefined,
 
       })
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`)
-      }
+      } 
     }
     else {
-      const file = await data.image[0] ? services.UploadFile(data.image[0]) : null
+      const file =  data.image[0] ? await services.UploadFile(data.image[0]) : null
 
       if (file) {
         const fileId = file.$id
-        data.featuredImg = fileId
+        data.featuredimage = fileId
         const dbPost = await services.CreatePost({
           ...data,
-          userId: userId.$id
+          userId: userData.$id
 
         })
         if (dbPost) {
@@ -53,13 +53,12 @@ function PostForm({ post }) {
     }
   }
 
-  const slugTransform = useCallback(() => {
+  const slugTransform = useCallback((value) => {
     if (value && typeof value === 'string')
       return value.trim()
         .toLowerCase()
-        .replace(/^[a-zA-Z\d\s]+/g, '-')
-        .replace(/\s/g, "-")
-
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
+        .replace(/\s/g, "-");
     return ""
   }, [])
 
@@ -76,7 +75,7 @@ function PostForm({ post }) {
       <div className='w-2/3 px-2'>
         <Input
           label="Title :"
-          placeHolder="Title"
+          placeholder="Title"
           className="mb-4"
           {...register("title", {
             required: true
@@ -85,7 +84,7 @@ function PostForm({ post }) {
 
         <Input
           label="Slug"
-          placeHolder="Slug"
+          placeholder="Slug"
           className="mb-4"
           {...register("slug", { required: true })}
           onInput={(e) => {
@@ -115,7 +114,7 @@ function PostForm({ post }) {
           (
             <div className='w-full mb-4'>
               <img
-                src={services.GetFilePreview(post.featuredImg)}
+                src={services.GetFilePreview(post.featuredimage)}
                 alt={post.title}
                 className='rounded' />
             </div>

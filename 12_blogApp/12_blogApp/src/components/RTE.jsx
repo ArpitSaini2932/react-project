@@ -1,40 +1,37 @@
-import React from 'react'
-import {Editor } from "@tinymce/tinymce-react"
-import {Controller} from "react-hook-form"
+import React from "react"
+import { Editor } from "@tinymce/tinymce-react"
+import { Controller } from "react-hook-form"
 
-export default function RTE({ name, control, defaultValue = "", label }) {
-    return (
-        <div className='w-full'>
-            {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
-            <Controller
-            name={name || "content"}
-            control={control}
-            render={({field:{onChange}})=>(
-                <Editor
-                    initialValue = {defaultValue}
-                    init={
-                        {
-                            hight:500,
-                            menubar:true,
-                            Plugins: [
-                                'advlist autolink lists link image charmap print preview anchor',
+export default function RTE({ name = "content", control, defaultValue = "", label }) {
+  return (
+    <div className="w-full">
+      {label && <label className="inline-block mb-1 pl-1">{label}</label>}
 
-                                'searchreplace visualblocks code fullscreen',
-                                'insertdatetime media table paste code help wordcount'
-                            ],
-                            toolbar:
-                            'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright align'
-                            |'bullist numlist outdent indent | removeformat | help',
+      <Controller
+        name={name}
+        control={control}
+        defaultValue={defaultValue}
+        render={({ field: { onChange, value } }) => (
+          <Editor
+            apiKey="2tglskep3kldn1ygc83javggfetqfbvmkjrtor89fzgg64p8"
+            value={value}
+            init={{
+              height: 500,
+              menubar: true,
 
-                        }
-                    }
-                    onEditorChange={onChange}
-                    
-                />
-            )}
-    />
+              plugins: [
+                "advlist autolink lists link image charmap preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table help wordcount",
+              ],
 
-        </div> 
+              toolbar:
+                "undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | removeformat | help",
+            }}
+            onEditorChange={onChange}
+          />
+        )}
+      />
+    </div>
   )
-     }   
-            
+}

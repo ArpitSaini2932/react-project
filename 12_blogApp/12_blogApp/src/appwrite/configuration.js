@@ -14,32 +14,35 @@ export class Services{
         this.bucket= new Storage(this.client)
     }
 
-    async CreatePost({title , slug, content , status , featuredImg , userId}){
+    async CreatePost({title ,  content , status , featuredimage , userId}){
         try {
-            return  await this.databases.createDocument(slug, config.appwriteDatabaseId, config.appwriteCollectionId, {
+            return  await this.databases.createDocument( config.appwriteDatabaseId, config.appwriteCollectionId,ID.unique(),{
                 title,
-                slug,
+                
                 content,
                 userId,
                 status,
-                featuredImg
+                featuredimage,
             })
         } catch (error) {
             console.log("Appwrite Service :: CreatePost :: error" , error)
+            throw error
         }
     }
 
-    async UpdatePost(slug, {userId, content, status, featuredImg,title }){
+    async UpdatePost(slug, {userId, content, status, featuredimage,title }){
         try {
            return await this.databases.updateDocument(
-                slug,
-                config.appwriteCollectionId,
+              
+                
                 config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                
                 {
                     title,
                     status,
                     userId,
-                    featuredImg,
+                    featuredimage,
                     content
                 }
             )
@@ -51,9 +54,10 @@ export class Services{
     async DeletePost(slug){
         try {
           await this.databases.deleteDocument(
-                slug,
+                config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                config.appwriteDatabaseId
+                
+                slug,
             )
             return true 
 
@@ -67,9 +71,10 @@ export class Services{
     async GetPost(slug){
         try {
            return await this.databases.getDocument(
-                slug,
+                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                config.appwriteDatabaseId,
+               
+                slug,
             )
         } catch (error) {
             console.log("Appwrite Services :: GetPost :: error",error)
@@ -80,8 +85,9 @@ export class Services{
     async GetPosts(){
         try {
             return await this.databases.listDocuments(
-                config.appwriteCollectionId,
                 config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+           
                 [
                     Query.equal("status", "active")
                 ]
@@ -92,10 +98,11 @@ export class Services{
     }
     async UploadFile(file){
         try {
-            return await this.bucket.updateFile(
+            return await this.bucket.createFile(
                 config.appwriteBucketId,
-                file,
-                ID.unique()
+                ID.unique(),
+                file
+                
             )
         } catch (error) {
             console.log("Appwrite Services :: UploadFile :: error",error)
@@ -112,16 +119,16 @@ export class Services{
             console.log("Appwrite Services :: DeleteFile :: error", error)
         }
     }
-    GetFilePreview(fileId){
-        try {
-            return this.bucket.getFilePreview(
-                config.appwriteBucketId,
-                fileId
-            )
-        } catch (error) {
-            console.log("Appwrite Services :: GetFilePreview :: error", error)
-        }
-    }
+    GetFilePreview(fileId) {
+  try {
+    if (!fileId) return ""
+    return this.bucket.getFilePreview(config.appwriteBucketId, fileId)
+  } catch (error) {
+    console.log("Appwrite Services :: GetFilePreview :: error", error)
+    return ""
+  }
+}
+
 
 }
 

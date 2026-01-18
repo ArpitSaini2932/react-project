@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: "/edit-post/:slug",
+        path: "/edit-post/:id",
         element: (
           <AuthLayout Authentication>
             {""}
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: "/post/:slug",
+        path: "/post/:id",
         element: <Posts />
       }
       
@@ -78,6 +78,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-     <RouterProvider router={router}/>    </Provider>
+     <RouterProvider router={router}/></Provider>
   </StrictMode>
 )
