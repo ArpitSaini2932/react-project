@@ -20,9 +20,23 @@ export default function RTE({ name = "content", control, defaultValue = "", labe
               menubar: true,
 
               plugins: [
-                "advlist autolink lists link image charmap preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table help wordcount",
+                "advlist",
+                "autolink",
+                "lists",
+                "link",
+                "image",
+                "charmap",
+                "preview",
+                "anchor",
+                "searchreplace",
+                "visualblocks",
+                "code",
+                "fullscreen",
+                "insertdatetime",
+                "media",
+                "table",
+                "help",
+                "wordcount",
               ],
 
               toolbar:

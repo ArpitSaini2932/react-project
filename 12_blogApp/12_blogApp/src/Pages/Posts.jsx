@@ -72,7 +72,7 @@ export default function Posts() {
           <h1 className="text-2xl font-bold">{post.title}</h1>
         </div>
 
-        {/* ✅ prevent html-react-parser error */}
+       
         <div className="browser-css">{parse(post.content || "")}</div>
       </Container>
     </div>

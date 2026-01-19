@@ -18,7 +18,6 @@ export class Services{
         try {
             return  await this.databases.createDocument( config.appwriteDatabaseId, config.appwriteCollectionId,ID.unique(),{
                 title,
-                
                 content,
                 userId,
                 status,
@@ -30,14 +29,14 @@ export class Services{
         }
     }
 
-    async UpdatePost(slug, {userId, content, status, featuredimage,title }){
+    async UpdatePost(documentId, {userId, content, status, featuredimage,title }){
         try {
            return await this.databases.updateDocument(
               
                 
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                slug,
+                documentId,
                 
                 {
                     title,
@@ -45,7 +44,7 @@ export class Services{
                     userId,
                     featuredimage,
                     content,
-                    slug,
+                    
                 }
             )
         } catch (error) {
@@ -53,13 +52,13 @@ export class Services{
         }
     } 
 
-    async DeletePost(slug){
+    async DeletePost(documentId){
         try {
           await this.databases.deleteDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 
-                slug,
+                documentId,
             )
             return true 
 
@@ -70,13 +69,13 @@ export class Services{
         }
     }
     
-    async GetPost(slug){
+    async GetPost(documentId){
         try {
            return await this.databases.getDocument(
                  config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                
-                slug,
+                documentId,
             )
         } catch (error) {
             console.log("Appwrite Services :: GetPost :: error",error)
