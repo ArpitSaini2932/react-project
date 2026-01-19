@@ -37,13 +37,15 @@ export class Services{
                 
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
+                slug,
                 
                 {
                     title,
                     status,
                     userId,
                     featuredimage,
-                    content
+                    content,
+                    slug,
                 }
             )
         } catch (error) {
@@ -119,15 +121,16 @@ export class Services{
             console.log("Appwrite Services :: DeleteFile :: error", error)
         }
     }
-    GetFilePreview(fileId) {
+ GetFilePreview(fileId) {
   try {
     if (!fileId) return ""
-    return this.bucket.getFilePreview(config.appwriteBucketId, fileId)
+    return this.bucket.getFileView(config.appwriteBucketId, fileId) // ✅ changed here
   } catch (error) {
     console.log("Appwrite Services :: GetFilePreview :: error", error)
     return ""
   }
 }
+
 
 
 }
