@@ -17,7 +17,8 @@ function SignUp() {
         try {
             const UserData = await authservice.createAccount(data)
             if (UserData) {
-                await authservice.GetCurrentUser()
+                const currentUser = await authservice.GetCurrentUser()
+
                 if (UserData) {
                     dispatch(login({UserData: currentUser}))
                     navigate("/")
@@ -42,12 +43,22 @@ function SignUp() {
             className='font-medium text-primary transition-all duration-200 hover:underline'
             >Sign In</Link>
             </p>
- {error && <p className='text-red-600 mt-8 text-centre'></p>}
+{error && <p className='text-red-600 mt-4 text-center'>{error}</p>}
+
             <form className='mt-8' onSubmit={handleSubmit(signup)}>
                 <div className='space-y-5'>
+                    
+                     <Input type="text"
+                    label = "name"
+                    placeholder='Enter your Fulll Name'
+                    {...register("name",{
+                        required:true
+                    })}
+                    />
+
                     <Input type="text" 
-                    label = "Full Name "
-                    placeholder='Enter your full Name'
+                    label = "email"
+                    placeholder='Enter you Email Address'
                     {...register("email",{
                         required:true,
                         validate:{
