@@ -29,18 +29,16 @@ useEffect(() => {
 }, [dispatch])
 
 return !Loading ? (
-  <div className='min-h-screen flex flex-wrap bg-blue-500 content-between'>
-    <div className='w-full block '>
-      <Header />
-      <main>
-        hello
-       TODO: <Outlet />
-      </main>
-      <Footer/>
-    </div>
+  <div className="min-h-screen flex flex-col bg-blue-500">
+    <Header />
+
+    <main className="flex-1">
+      <Outlet />
+    </main>
+
+    <Footer />
   </div>
-  
-) : (null)
+) : null
 
 }
 
