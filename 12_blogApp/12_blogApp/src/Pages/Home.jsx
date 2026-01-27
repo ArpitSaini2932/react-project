@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { Container } from "../components"
+import { useSelector } from "react-redux"
 import PostCard from "../components/PostCard"
 
 export default function Landing() {
