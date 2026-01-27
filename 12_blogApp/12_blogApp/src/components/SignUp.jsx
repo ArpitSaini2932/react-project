@@ -21,7 +21,7 @@ function SignUp() {
 
                 if (UserData) {
                     dispatch(login({UserData: currentUser}))
-                    navigate("/")
+                    navigate("/all-posts")
                 }
             }
         } catch (error) {
@@ -42,7 +42,7 @@ function SignUp() {
             <Link to="/login"
             className='font-medium text-primary transition-all duration-200 hover:underline'
             >Sign In</Link>
-            </p>
+                </p>
 {error && <p className='text-red-600 mt-4 text-center'>{error}</p>}
 
             <form className='mt-8' onSubmit={handleSubmit(signup)}>

@@ -14,7 +14,7 @@ export class Services{
         this.bucket= new Storage(this.client)
     }
 
-    async CreatePost({title ,  content , status , featuredimage , userId}){
+    async CreatePost({title ,  content , status , featuredimage ,  name, userId}){
         try {
             return  await this.databases.createDocument( config.appwriteDatabaseId, config.appwriteCollectionId,ID.unique(),{
                 title,
@@ -23,6 +23,7 @@ export class Services{
                 status,
                 featuredimage,
                 userId,
+                name,
             })
         } catch (error) {
             console.log("Appwrite Service :: CreatePost :: error" , error)

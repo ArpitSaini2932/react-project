@@ -6,6 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function PostForm({ post }) {
+
+
+
+
+
   const { register, handleSubmit, setValue, getValues, watch, control, reset } = useForm({
     defaultValues: {
       title: "",
@@ -17,6 +22,9 @@ function PostForm({ post }) {
 
   const navigate = useNavigate()
   const userData = useSelector((state) => state.auth.userData)
+
+
+ 
 
   const slugTransform = useCallback((value) => {
     if (value && typeof value === 'string')
@@ -67,6 +75,7 @@ function PostForm({ post }) {
           ...data,
           featuredimage: file.$id,
           userId: userData.$id,
+          name: userData.name, 
         })
 
         if (dbPost) {
@@ -88,7 +97,7 @@ function PostForm({ post }) {
 
     return () => subscription.unsubscribe()
   }, [watch, slugTransform, setValue])
-
+ 
   return (
     <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
       <div className='w-2/3 px-2'>

@@ -21,7 +21,7 @@ function Login() {
                 const userdata = await authservice.GetCurrentUser()
                 if (userdata) {
                     dispatch(authLogin(userdata))
-                    navigate("/")
+                    navigate("/all-posts")
                 }
             }
         } catch (error) {

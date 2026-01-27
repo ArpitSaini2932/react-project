@@ -4,7 +4,24 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+
+
+
 function Header() {
+
+  const [scrolled, setScrolled] = React.useState(false)
+
+React.useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 10)
+  }
+
+  window.addEventListener("scroll", handleScroll)
+  handleScroll()
+
+  return () => window.removeEventListener("scroll", handleScroll)
+}, [])
+
   const authStatus  = useSelector((state)=> state.auth.status )
   const navigate = useNavigate()
 
@@ -36,22 +53,29 @@ function Header() {
     },
   ]
   return (
-    <div className='py-3 shadow shadow-2xl rounded rounded-b-2xl bg-white'>
+    <div
+  className={`py-2 fixed top-0 left-0 w-full z-50 transition-all duration-300
+  ${scrolled
+    ? "bg-white/50 backdrop-blur-xl shadow-md"
+    : "bg-white shadow-none"
+  }`}
+>
+
     <Container>
       <nav className='flex justify-center items-center h-16 '>
-        <div className='mr-4 flex justify-center items-center' > 
+        <div className=' flex pt-5 z-0 justify-center items-center ' > 
           <Link to="/">
           <Logo/>
           </Link>
-          <div className='font-bold font-serif text-2xl'><p>Blog</p></div>
+          <div className='font-bold pb-5 font-serif text-2xl py-[-10px]'><p>Blog</p></div>
         </div>
         
-        <ul className='flex ml-auto justify-center items-center gap-4 '>
+        <ul className='flex ml-auto justify-center text-[14px] items-center gap-5 '>
           {NavItems.map((item)=>
             item.active ? (
               <li key = {item.name}>
                 <button onClick={()=> navigate(item.slug)}
-                  className='inline-block px-3 py-2  duration-500 hover:scale-[1.06] hover:bg-blue-100 rounded-full'>
+                  className='inline-block px-3 py-2 hover:shadow-2xl duration-500 hover:scale-[1.06] cursor-pointer hover:bg-blue-100 rounded-full'>
                   {item.name}
                 </button>
               </li>
@@ -68,5 +92,4 @@ function Header() {
     </div>
   )
 }
-
 export default Header

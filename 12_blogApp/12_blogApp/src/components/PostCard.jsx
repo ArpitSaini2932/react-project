@@ -11,11 +11,12 @@ function PostCard({ $id, featuredimage, title }) {
     
 
     <Link to={`/post/${$id}`}>
-      <div className="w-full rounded-lg bg-gray-100 p-4">
+      <div className="w-full rounded-lg bg-white p-5 hover:shadow-2xl duration-300 hover:scale-[1.06] transition-transform  cursor-pointer">
+        
         <div className="w-full justify-center mb-4">
           {featuredimage ? (
             <img
-              className="rounded-xl"
+              className="rounded-xl w-full h-60 object-cover"
               src={service.GetFilePreview(featuredimage)}
               alt={title}
             />

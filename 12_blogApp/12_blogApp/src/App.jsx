@@ -29,10 +29,10 @@ useEffect(() => {
 }, [dispatch])
 
 return !Loading ? (
-  <div className="min-h-screen flex flex-col bg-blue-500">
+  <div className="min-h-screen flex flex-col bg-gray-200 ">
     <Header />
 
-    <main className="flex-1">
+    <main className="flex-1 pt-[70px]">
       <Outlet />
     </main>
 
