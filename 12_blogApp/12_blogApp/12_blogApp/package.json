@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
-    "@tailwindcss/vite": "^4.1.18",
-    "@tinymce/tinymce-react": "^6.3.0",
+    "@tailwindcss/vite": "^4.1.8",
+    "@tinymce/tinymce-react": "^6.2.0",
     "appwrite": "^18.1.1",
     "html-react-parser": "^5.2.5",
     "react": "^19.1.0",
@@ -32,7 +32,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "postcss": "^8.5.4",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.1.8",
     "vite": "^6.3.5"
   }
 }
