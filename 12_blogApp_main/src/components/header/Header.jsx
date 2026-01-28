@@ -26,11 +26,7 @@ React.useEffect(() => {
   const navigate = useNavigate()
 
   const NavItems = [
-    {
-      name : "Home"   ,
-      slug : "/",
-      active : true
-    },
+    
     {
       name : "Login" ,
       slug : "/login",
@@ -67,7 +63,9 @@ React.useEffect(() => {
           <Link to="/">
           <Logo/>
           </Link>
+          <Link to="/">
           <div className='font-bold pb-5 font-serif text-2xl py-[-10px]'><p>Blog</p></div>
+          </Link>
         </div>
         
         <ul className='flex ml-auto justify-center text-[14px] items-center gap-5 '>
