@@ -30,7 +30,7 @@ function Login() {
     }
     return (
         <div
-            className='items-center flex  justify-center w-full'
+            className='items-center flex mx-auto w-auto max-w-lg my-10 bg-gray-100 rounded-xl  border-black/10 border justify-center '
         >
             <div className={`mx-auto w-full max-w-lg bg-gray rounded-xl p-10 border border-black/10`}>
                 <div className='mb-2 flex justify-center'>
@@ -53,7 +53,7 @@ function Login() {
                 onSubmit={handleSubmit(login)}
                 className='mt-8'
                 >
-                   <div className='space-y-5'>
+                   <div className='space-y-5 flex justify-center items-center flex-col'>
                      <Input
                      label="Email: "
                      placeholder='Enter Your Email...'
@@ -74,8 +74,10 @@ function Login() {
                         required: true
                      })}
                      />
-                     <button type='submit'
-                     className='w-full rounded'>Sign Up</button>
+                     <button 
+                     
+                     type='submit'
+                     className=' font-bold bg-blue-500  w-25 px-3 py-2 text-center text-primary hover:scale-[1.06] duration-300 hover:bg-blue-600 mb-3 mt-3 rounded-lg cursor-pointer'>Sign In</button>
                      </div>     
                 </form>
             </div>

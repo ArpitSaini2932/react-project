@@ -31,7 +31,7 @@ function SignUp() {
     return (
         <div className='flex items-center justify-center'>
             <div className={`mx-auto w-auto max-w-lg bg-gray-100 rounded-xl p-10 border-black/10 border`}>
-             <div className='mb-2 flex  jsutify-center'>
+             <div className='mb-2 flex  justify-center'>
               <span className='inline-block w-full max-w-25'>
                 <Logo width='100%'/>
               </span>    
@@ -46,7 +46,7 @@ function SignUp() {
 {error && <p className='text-red-600 mt-4 text-center'>{error}</p>}
 
             <form className='mt-8' onSubmit={handleSubmit(signup)}>
-                <div className='space-y-5'>
+                <div className='space-y-5 flex justify-center items-center flex-col'>
                     
                      <Input type="text"
                     label = "name"
@@ -72,12 +72,12 @@ function SignUp() {
                     label = "Password "
                     placeholder='Enter your password'
                     {...register("password",{
-                        required:true
+                        required:true 
                     })}
                     />
                     <button
                     type='submit'
-                    className='w-full'
+                    className='font-bold bg-blue-500  mt-3 w-37 px-3 py-2 text-center text-primary hover:scale-[1.06] duration-300 hover:bg-blue-600 mb-3 rounded-lg cursor-pointer'
                     >Create Account</button>
                 </div>
             </form>
